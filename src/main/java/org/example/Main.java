@@ -4,7 +4,10 @@ package org.example;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Ajla");
+        mydate m=new mydate(1,2,2003);
+        person p =new person("ajla",20,m);
+        p.setocj(1);
+
 
     }
 }
