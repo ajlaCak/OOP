@@ -1,19 +1,34 @@
 package org.example;
 
-public class book implements tobestored{
-    private String book;
-    private String name;
-    private double weight;
+public class book {
+    private String title;
+    private String publisher;
+    private int year;
 
-    public book(String book,String name, double weight) {
-        this.book = book;
-        this.name=name;
-        this.weight=weight;
+    public book(String title, String publisher, int year) {
+        this.title = title;
+        this.publisher = publisher;
+        this.year = year;
     }
-    public String toString(){
-        return book+" "+name;
+
+    public String Title() {
+        return title;
     }
-    public double weight(){
-        return weight;
+
+    public String Publisher() {
+        return publisher;
+    }
+
+    public int Year() {
+        return year;
+    }
+
+    @Override
+    public String toString() {
+        return "book{" +
+                "title='" + title + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", year=" + year +
+                '}';
     }
 }
