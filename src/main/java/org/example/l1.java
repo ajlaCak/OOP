@@ -1,50 +1,35 @@
 package org.example;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+ class Logger {
+     private static Logger instance;
+     private Logger(){}
+     public static Logger getInstance(){
+         synchronized (Logger.class){
+             if(instance!=null){
+                 instance=new Logger();
+             }
+         }return instance;
+     }
+     public void log(String m){
+         logm("log",m);
+     }
+     public void info(String m){
+         logm("info",m);
+     }
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-@interface cansendmessage{}
+     public void error(String m){
+         logm("error",m);
+     }
+     private void logm(String urgent,String m){
+         System.out.println(urgent+m);
+     }
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD,ElementType.TYPE})
-@interface requirespermission{
-    int value() default 0;
+
 }
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@interface userperimision{
-    int value () default 0;
+ class main {
+public static void main(String[] args){
+    Logger l=Logger.getInstance();
+    l.error("help");
 }
-@userperimision(value=1)
-class User {
-    String username;
-
-    public User(String username) {
-        this.username = username;
-    }
 }
-@userperimision(value=1)
-class Admin {
-    String username;
-
-    public Admin(String username) {
-        this.username = username;
-    }
-}
- class MessagingSystem {
-
-@requirespermission(value=1)
-    public static void sendMessage(User user, String message) {
-        System.out.println("User " + user.username + " sent a message: " + message);
-    }
-
-@requirespermission(value=2)
-    public static void sendMessage(Admin admin, String message) {
-        System.out.println("Admin " + admin.username + " sent a message: " + message);
-    }}
 
